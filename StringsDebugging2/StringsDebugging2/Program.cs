@@ -18,8 +18,6 @@ namespace StringsDebugging2
 {
     class Program
     {
-
-/*determina corect cand exista testul de cautat , eroare indexoutofbound cand nu corespunde textul deloc*/
         static void Main(string[] args)
         {
             string text = Console.ReadLine();
@@ -31,19 +29,21 @@ namespace StringsDebugging2
             {
                 bool match = true;
 
-                for (int j = 0; j < textToFind.Length; j++)
+                for (int j = 0; j < textToFind.Length ; j++)
                 {
-                    if (text[i + j] != textToFind[j])
+                    if (text[i+j] != textToFind[j])
                     {
                         match = false;
+                        continue;
                     }
-                    continue;
+                 
                 }
 
                 if (match)
                 {
                     count++;
                 }
+        
 
             }
 
