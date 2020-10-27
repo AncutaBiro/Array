@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 
 namespace Arrays3
 {
 
-/*
- inca lucrez
- */
+    /*
+     inca lucrez
+     */
+
     class Program
     {
         static void Main(string[] args)
@@ -25,8 +27,6 @@ namespace Arrays3
             }
 
             string bothTeams = redTeam.Concat(greenTeam).ToArray().ToString();
-
-           
 
             string requestName = Console.ReadLine();
 
@@ -61,6 +61,28 @@ namespace Arrays3
             {
                 Console.WriteLine("N/A");
             }
+
+            /*            for (int i = 0; i < redTeam.Length; i++)
+                        {
+                            if (requestName == greenTeam[i])
+                            {
+                                Console.WriteLine("echipa verde");
+                            }
+                            else if (requestName == redTeam[i])
+                            {
+                                Console.WriteLine("echipa rosie");)
+                            }
+                      *//*       else 
+                            {
+                               continue;
+                            }*//*
+                         break;
+                         }
+
+                Console.Write ("no")*/
+
+
+
 
         }
     }
