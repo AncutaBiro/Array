@@ -1,5 +1,28 @@
-﻿using System;
-using System.Transactions;
+﻿/*
+Un comerciant are într-un oraș un lanț de N magazine.
+Să se scrie o aplicație consolă ce primește ca date de intrare:
+pe prima linie numărul de magazine N
+apoi încă N linii, fiecare dintre ele conținând profitul pe cele 4 trimestre anului, cu două zecimale precizie, pentru câte un magazin. Numerele sunt depărțite între ele printr-un spațiu.
+Și tipărește:
+
+cel mai profitabil trimestru, în formatul Trimestrul 2: 5231.82
+cel mai profitabil magazin, in formatul Magazinul 1: 765.20
+Exemplu:
+
+Pentru datele de intrare:
+2
+1000.50 2000.00 1000.00 3000.00
+500.00 600.00 700.00 800.00
+
+La consolă se va afișa:
+
+Trimestrul 4: 3800.00
+Magazinul 1: 7000.50
+ 
+ */
+
+
+using System;
 
 namespace Arrays7
 {
@@ -7,68 +30,89 @@ namespace Arrays7
     {
         static void Main(string[] args)
         {
+            int noStores = Convert.ToInt32(Console.ReadLine());
+            const int trimesters = 4;
 
-            int noStores = 2;
+            double[,] matrix = new double[noStores, trimesters];
 
-            int trimesters = 4;
+            double[] sumTrimester = new double[trimesters];
+            string maxSumTrimester;
 
-            double[] doubleArray = new double [100];
+            double[] sumStore = new double[noStores];
+            string maxSumStore;
 
 
-
-            int[,] matrix = new int [noStores, trimesters];/*
-*/
-            while (noStores > 0)
+            for (int i = 0; i < noStores; i++)
             {
-                
-                string [] input = Console.ReadLine().Split();
+                String input = Console.ReadLine();
+                String[] inputs = input.Split(' ');
 
-/*                if (input != '\n')*/
+                for (int j = 0; j < trimesters; j++)
                 {
-                    doubleArray = Array.ConvertAll(input, double.Parse);
+                    matrix[i, j] = Convert.ToDouble(inputs[j]);
                 }
-
-                foreach (double i in doubleArray)
-                    Console.WriteLine(i);
-
-
-              /*  string[] stringArray = input.ToString("F", input.Split(" "));
-
-                for (int i = 0; i < stringArray.Length; i++)
-                {
-                    doubleArray[i] = Math.Round (Convert.ToDouble(stringArray[i]), 2);
-                    Console.Write(doubleArray[i]);
-                }
-*/
-                /* while (input != " " && char.Parse(input) != '\n')
-                 {
-                     for (int i = 0; i < input.Length; i++)
-                     {
-                         doubleArray [i] = Convert.ToDouble(input);
-                     }
-                 }
-
-                 noStores--;
-              }*/
-
             }
 
 
-                
-            /*            }*/
-
-           /* foreach (int i in matrix)
+            for (int j = 0; j < trimesters; j++)
             {
-                foreach (int j in matrix) 
-                { 
+                for (int i = 0; i < noStores; i++)
 
-                Console.Write(matrix[i, j] + " ");
+                {
+                    sumTrimester[j] += Math.Round (matrix[i, j], 2);
+                }
+            }
+             maxSumTrimester = string.Format("{0:0.00}", max(sumTrimester));
+             int p1 = positionMax (sumTrimester);
+
+             Console.WriteLine("Trimestrul " + p1 + ": " + maxSumTrimester);
+
+
+            for (int i = 0; i < noStores; i++)
+            {
+                for (int j = 0; j < trimesters; j++)
+
+                {
+                    sumStore [i] += Math.Round(matrix[i, j], 2);
+                }
+            }
+            maxSumStore = string.Format("{0:0.00}", max(sumStore));
+            int p2 = positionMax (sumStore);
+
+            Console.WriteLine("Magazinul " + p2 + ": " + maxSumStore);
+
+        }
+
+
+        private static double max (double[] dArray)
+            {
+                double max = dArray[0];
+
+                for (int i = 0; i < dArray.Length; i++)
+                {
+                    if (dArray[i] > max)
+                    {
+                        max = dArray[i];
+                    }
                 }
 
-                Console.WriteLine(" "); 
-            }*/
-            
-           
+                return max;
         }
+
+        private static int positionMax (double[] dArray)
+        {
+            double max = dArray[0];
+
+            for (int i = 0; i < dArray.Length; i++)
+            {
+                if (dArray[i] > max)
+                {
+                    max = dArray[i];
+                }
+            }
+            return Array.IndexOf(dArray, max) + 1;
+        }
+
     }
 }
+
